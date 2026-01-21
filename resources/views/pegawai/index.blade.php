@@ -20,9 +20,12 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </div>
-                <input type="text" 
-                    class="block w-full pl-11 pr-4 py-3 rounded-2xl border-none bg-[#fafafa] text-sm text-[#171717] placeholder-[#444444]/50 focus:ring-2 focus:ring-[#fd2800]/20 focus:bg-white transition-all shadow-inner" 
-                    placeholder="Cari NIP / Nama Pegawai...">
+<input 
+    type="text"
+    id="searchPegawai"
+    class="block w-full pl-11 pr-4 py-3 rounded-2xl border-none bg-[#fafafa] text-sm text-[#171717] placeholder-[#444444]/50 focus:ring-2 focus:ring-[#fd2800]/20 focus:bg-white transition-all shadow-inner"
+    placeholder="Cari NIP / Nama Pegawai..."
+>
             </div>
 
             {{-- 3. RIGHT: Add Button --}}
@@ -56,7 +59,11 @@
                         </thead>
                         <tbody class="divide-y divide-[#ededed]">
                             @forelse($pegawais as $pegawai)
-                            <tr class="group hover:bg-[#fafafa] transition-colors duration-200">
+<tr
+    data-nama="{{ strtolower($pegawai->nama_pegawai) }}"
+    data-nip="{{ strtolower($pegawai->nip_pegawai) }}"
+    class="group hover:bg-[#fafafa]"
+>
                                 
                                 {{-- Identitas --}}
                                 <td class="py-4 pl-8 pr-4 whitespace-nowrap">
@@ -301,4 +308,9 @@
             Toast.fire({ icon: 'success', iconColor: '#fd2800', title: '{{ session("success") }}' })
         @endif
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @vite('resources/js/pegawai-search.js')
+
 </x-app-layout>
